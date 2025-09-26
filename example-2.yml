@@ -13,10 +13,11 @@
 
     - name: Install MySQL on Host Machines
       action: yum pkg=mysql state=present
+      ignore_errors: yes
 
     - name: Start Python Server on Host Machines
       action: service name=python state=started
-      ignore_errors: yes
+  
 
     - name: Stop Python Server on Host Machines
       action: service name=python state=stopped
