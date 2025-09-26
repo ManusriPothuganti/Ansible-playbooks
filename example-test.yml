@@ -10,6 +10,7 @@
 
     - name: Install docker on Host Machines
       action: yum pkg=docker state=present
+      ignore_errors: yes
 
     - name: Start Docker Server on Host Machines
       action: service name=docker state=started
@@ -17,5 +18,5 @@
     - name: Stop Docker Server on Host Machines
       action: service name=docker state=stopped
 
-    - name: Restart the Docke Server on Host Machines
+    - name: Restart the Docker Server on Host Machines
       action: service name=docker state=restarted
