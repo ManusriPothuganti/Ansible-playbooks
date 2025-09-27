@@ -9,8 +9,6 @@
     java_package: java-17-amazon-corretto-devel
     jenkins_repo_url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
     jenkins_key_url: https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
-    python_path: /usr/bin/python3.11
-    pip_path: /usr/bin/pip3.11
 
   tasks:
     - name: Install OpenJDK 17
@@ -41,19 +39,19 @@
         name: jenkins
         enabled: true
 
-    - name: Ensure pip is available for Python 3.11
-      shell: "{{ python_path }} -m ensurepip --upgrade"
+    - name: Ensure pip is installed for Python 3.11
+      shell: python3.11 -m ensurepip --upgrade
       args:
-        creates: "{{ pip_path }}"
+        creates: /usr/local/bin/pip3.11
 
-    - name: Upgrade pip to latest version
-      shell: "{{ pip_path }} install --upgrade pip"
+    - name: Upgrade pip for Python 3.11
+      shell: python3.11 -m pip install --upgrade pip
 
     - name: Install setuptools for Python 3.11
-      shell: "{{ pip_path }} install setuptools"
+      shell: python3.11 -m pip install setuptools
 
     - name: Install docker-py for Python 3.11
-      shell: "{{ pip_path }} install docker"
+      shell: python3.11 -m pip install docker
 
     - name: Wait for Jenkins port 8080 to be available
       wait_for:
